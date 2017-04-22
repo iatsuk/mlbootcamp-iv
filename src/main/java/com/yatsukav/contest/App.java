@@ -1,18 +1,19 @@
 package com.yatsukav.contest;
 
-import org.apache.spark.sql.SparkSession;
+import com.yatsukav.contest.data.InitialData;
+import com.yatsukav.contest.spark.Spark;
+
+import java.io.IOException;
 
 public class App {
 
-    public static void main(String[] args) {
-        SparkSession spark = new SparkSession.Builder()
-                .appName("MLBootCampIV_Yatsuk")
-                .master("local[*]")
-                .getOrCreate();
-        spark.sparkContext().setLogLevel("WARN");
+    public static void main(String[] args) throws IOException {
+        Spark.init();
+        InitialData.init();
 
+        System.out.println();
 
-        spark.stop();
+        Spark.stop();
     }
 
 }

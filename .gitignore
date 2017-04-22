@@ -9,8 +9,12 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-# IntelliJ project files
+# IntelliJ
 .idea
 *.iml
 out
 gen
+
+# Project
+warehouse
+spark-warehouse
