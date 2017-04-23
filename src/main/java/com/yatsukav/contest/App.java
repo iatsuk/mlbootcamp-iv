@@ -1,7 +1,7 @@
 package com.yatsukav.contest;
 
 import com.yatsukav.contest.data.InitialData;
-import com.yatsukav.contest.research.DecisionTreeResearch;
+import com.yatsukav.contest.research.DecisionTreeLabel4;
 import com.yatsukav.contest.spark.Spark;
 
 import java.io.IOException;
@@ -12,7 +12,10 @@ public class App {
         Spark.init();
         InitialData.init();
 
-        DecisionTreeResearch.run(79, false);
+        //DecisionTreeResearch.run(79, false);
+        DecisionTreeLabel4.run(165);
+        for (int i = 1; i < 223; i++) {
+        }
 
         Spark.stop();
     }
