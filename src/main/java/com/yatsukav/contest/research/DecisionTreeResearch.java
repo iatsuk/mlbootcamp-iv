@@ -71,6 +71,9 @@ public interface DecisionTreeResearch {
         System.out.println("Accuracy is equal of current top: " + (accuracy == currentTop));
         System.out.println("Accuracy is worse of current top: " + (accuracy < currentTop));
 
+        System.out.println();
+        ResearchUtil.printPercentageConfusionMatrix(train, "label", "prediction");
+
         if (printTestDataResult) {
             //// TEST DATA PREDICTION
             Dataset<Row> test = InitialData.getTestDF();
