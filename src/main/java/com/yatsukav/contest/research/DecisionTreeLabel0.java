@@ -12,16 +12,16 @@ import org.apache.spark.sql.functions;
 
 import java.util.Arrays;
 
-public interface DecisionTreeLabel4 {
+public interface DecisionTreeLabel0 {
 
     /**
-     * Current top accuracy: 0.34545454545454546; negative result: 0.0026706231454005935
-     * PCA_K: 165
+     * Current top accuracy: 0.415929203539823; negative result: 0.004164187983343248
+     * PCA_K: 100
      */
     static void run(int pcaK) {
         // Get train dataset
         Dataset<Row> train = InitialData.getTrainDF();
-        train = train.withColumn("label", functions.expr("if(label=4, cast(0 as double), cast(1 as double))"));
+        train = train.withColumn("label", functions.expr("cast(if(label=0, 0, 1) as double)"));
 
         // Features columns names
         String[] features = Arrays.stream(train.columns())

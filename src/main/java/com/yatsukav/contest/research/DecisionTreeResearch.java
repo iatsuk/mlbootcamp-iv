@@ -27,7 +27,7 @@ public interface DecisionTreeResearch {
         String[] features = Arrays.stream(train.columns())
                 .filter(c -> !c.equals("label"))
                 .toArray(String[]::new);
-//            System.out.println("Features count: " + features.length);
+        System.out.println("Features count: " + features.length);
 
         // All columns with features to single multidimensional vector
         VectorAssembler assembler = new VectorAssembler()
@@ -66,12 +66,6 @@ public interface DecisionTreeResearch {
         double accuracy = evaluator.evaluate(train);
         System.out.println("pca: " + pcaK + "; accuracy: " + accuracy);
 
-        double currentTop = 0.5697907709945543;
-        System.out.println("Accuracy is better of current top: " + (accuracy > currentTop));
-        System.out.println("Accuracy is equal of current top: " + (accuracy == currentTop));
-        System.out.println("Accuracy is worse of current top: " + (accuracy < currentTop));
-
-        System.out.println();
         ResearchUtil.printPercentageConfusionMatrix(train, "label", "prediction");
 
         if (printTestDataResult) {
