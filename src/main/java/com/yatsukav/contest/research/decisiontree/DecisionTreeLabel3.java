@@ -16,7 +16,10 @@ import java.util.Arrays;
 public interface DecisionTreeLabel3 {
 
     /**
-     * Current top accuracy: 0.6408934707903781; negative result: 0.2340764331210191
+     * Current top accuracy: 0.32013769363166955; negative result: 0.039313795568263046
+     *      0	1
+     * 0:	32	67
+     * 1:	3	96
      * PCA_K: 140
      */
     static void run(int pcaK) {

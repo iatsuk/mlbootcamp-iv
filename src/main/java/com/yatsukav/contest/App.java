@@ -22,30 +22,13 @@ public class App {
         DecisionTreeLabel1.run(140);
 
         System.out.println("\n\n===== Decision tree by 2 label =====");
-        DecisionTreeLabel2.run(140);
+        DecisionTreeLabel2.run(131);
 
         System.out.println("\n\n===== Decision tree by 3 label =====");
-        DecisionTreeLabel3.run(140);
+        DecisionTreeLabel3.run(165);
 
         System.out.println("\n\n===== Decision tree by 4 label+ =====");
         DecisionTreeLabel4.run(165);
-
-        System.out.println("\n\n===== Decision tree by 1 label!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! =====");
-        for (int i = 1; i < 223; i++) {
-            DecisionTreeLabel1.run(i);
-        }
-
-
-        System.out.println("\n\n===== Decision tree by 2 label!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! =====");
-        for (int i = 1; i < 223; i++) {
-            DecisionTreeLabel2.run(i);
-        }
-
-
-        System.out.println("\n\n===== Decision tree by 3 label!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! =====");
-        for (int i = 1; i < 223; i++) {
-            DecisionTreeLabel3.run(i);
-        }
 
         Spark.stop();
     }

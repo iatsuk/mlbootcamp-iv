@@ -17,6 +17,9 @@ public interface DecisionTreeLabel1 {
 
     /**
      * Current top accuracy: 0.6408934707903781; negative result: 0.2340764331210191
+     *  	0	1
+     * 0:	64	35
+     * 1:	18	81
      * PCA_K: 140
      */
     static void run(int pcaK) {

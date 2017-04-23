@@ -16,8 +16,11 @@ import java.util.Arrays;
 public interface DecisionTreeLabel2 {
 
     /**
-     * Current top accuracy: 0.6408934707903781; negative result: 0.2340764331210191
-     * PCA_K: 140
+     * Current top accuracy: 0.5121630506245891; negative result: 0.38105263157894737
+     *  	0	1
+     * 0:	51	48
+     * 1:	27	72
+     * PCA_K: 131
      */
     static void run(int pcaK) {
         // Get train dataset
