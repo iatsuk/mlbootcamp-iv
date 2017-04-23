@@ -94,7 +94,6 @@ public interface ResearchUtil {
             System.out.println();
         }
 
-        System.out.println();
         for (Double currentLabel : labels) {
             System.out.println("Total count of " + currentLabel + " is: " + preMatrix.get(currentLabel).get(0));
         }

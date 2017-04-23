@@ -1,6 +1,7 @@
-package com.yatsukav.contest.research;
+package com.yatsukav.contest.research.decisiontree;
 
 import com.yatsukav.contest.data.InitialData;
+import com.yatsukav.contest.research.ResearchUtil;
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel;
 import org.apache.spark.ml.classification.DecisionTreeClassifier;
 import org.apache.spark.ml.feature.PCA;
@@ -21,7 +22,7 @@ public interface DecisionTreeLabel4 {
     static void run(int pcaK) {
         // Get train dataset
         Dataset<Row> train = InitialData.getTrainDF();
-        train = train.withColumn("label", functions.expr("if(label=4, cast(0 as double), cast(1 as double))"));
+        train = train.withColumn("label", functions.expr("cast(if(label=4, 0, 1) as double)"));
 
         // Features columns names
         String[] features = Arrays.stream(train.columns())

@@ -1,6 +1,7 @@
-package com.yatsukav.contest.research;
+package com.yatsukav.contest.research.decisiontree;
 
 import com.yatsukav.contest.data.InitialData;
+import com.yatsukav.contest.research.ResearchUtil;
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel;
 import org.apache.spark.ml.classification.DecisionTreeClassifier;
 import org.apache.spark.ml.feature.PCA;

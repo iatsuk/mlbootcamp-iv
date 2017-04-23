@@ -1,33 +1,33 @@
-package com.yatsukav.contest.research;
+package com.yatsukav.contest.research.decisiontree;
 
 import com.yatsukav.contest.data.InitialData;
+import com.yatsukav.contest.research.ResearchUtil;
 import org.apache.spark.ml.classification.DecisionTreeClassificationModel;
 import org.apache.spark.ml.classification.DecisionTreeClassifier;
-import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator;
 import org.apache.spark.ml.feature.PCA;
 import org.apache.spark.ml.feature.PCAModel;
 import org.apache.spark.ml.feature.VectorAssembler;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
-import org.apache.spark.sql.SaveMode;
+import org.apache.spark.sql.functions;
 
 import java.util.Arrays;
 
-public interface DecisionTreeResearch {
+public interface DecisionTreeLabel2 {
 
     /**
-     * Current top accuracy: 0.5697907709945543
-     * PCA_K: 79
+     * Current top accuracy: 0.6408934707903781; negative result: 0.2340764331210191
+     * PCA_K: 140
      */
-    static void run(int pcaK, boolean printTestDataResult) {
+    static void run(int pcaK) {
         // Get train dataset
         Dataset<Row> train = InitialData.getTrainDF();
+        train = train.withColumn("label", functions.expr("cast(if(label=2, 0, 1) as double)"));
 
         // Features columns names
         String[] features = Arrays.stream(train.columns())
                 .filter(c -> !c.equals("label"))
                 .toArray(String[]::new);
-        System.out.println("Features count: " + features.length);
 
         // All columns with features to single multidimensional vector
         VectorAssembler assembler = new VectorAssembler()
@@ -56,25 +56,14 @@ public interface DecisionTreeResearch {
                 .setRawPredictionCol("raw_prediction");
         train = model.transform(train).drop(features);
 
-//            System.out.println(model.toDebugString());
-//            train.show();
+        long countLabel = train.select("label").filter("label=0").count();
+        long countPositivePredicted = train.select("label", "prediction").filter("label=0 and prediction=0").count();
+        long countForNegativePredicted = train.select("label", "prediction").filter("label=1 and prediction=1").count();
+        long countNegativePredicted = train.select("label", "prediction").filter("label=1 and prediction=0").count();
 
-        MulticlassClassificationEvaluator evaluator = new MulticlassClassificationEvaluator()
-                .setLabelCol("label")
-                .setPredictionCol("prediction")
-                .setMetricName("accuracy");
-        double accuracy = evaluator.evaluate(train);
-        System.out.println("pca: " + pcaK + "; accuracy: " + accuracy);
+        double accuracy = (double) countPositivePredicted / countLabel;
+        System.out.println("pca: " + pcaK + "; accuracy: " + accuracy + "; negative result: " + ((double) countNegativePredicted / countForNegativePredicted));
 
         ResearchUtil.printPercentageConfusionMatrix(train, "label", "prediction");
-
-        if (printTestDataResult) {
-            //// TEST DATA PREDICTION
-            Dataset<Row> test = InitialData.getTestDF();
-            test = assembler.transform(test);
-            test = pca.transform(test).drop("features").withColumnRenamed("pcaFeatures", "features");
-            test = model.transform(test);
-            test.select("prediction").coalesce(1).write().mode(SaveMode.Overwrite).option("separator", ";").csv("dt.csv");
-        }
     }
 }
