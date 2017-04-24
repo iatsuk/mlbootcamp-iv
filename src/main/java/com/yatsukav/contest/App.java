@@ -1,7 +1,6 @@
 package com.yatsukav.contest;
 
 import com.yatsukav.contest.data.InitialData;
-import com.yatsukav.contest.research.decisiontree.*;
 import com.yatsukav.contest.spark.Spark;
 
 import java.io.IOException;
@@ -12,23 +11,8 @@ public class App {
         Spark.init();
         InitialData.init();
 
-        System.out.println("\n\n===== Multiclass decision tree =====");
-        DecisionTreeResearch.run(79, false);
-
-        System.out.println("\n\n===== Decision tree by 0 label+ =====");
-        DecisionTreeLabel0.run(100);
-
-        System.out.println("\n\n===== Decision tree by 1 label =====");
-        DecisionTreeLabel1.run(140);
-
-        System.out.println("\n\n===== Decision tree by 2 label =====");
-        DecisionTreeLabel2.run(131);
-
-        System.out.println("\n\n===== Decision tree by 3 label =====");
-        DecisionTreeLabel3.run(165);
-
-        System.out.println("\n\n===== Decision tree by 4 label+ =====");
-        DecisionTreeLabel4.run(165);
+//        System.out.println("\n\n===== Multiclass decision tree =====");
+//        DecisionTreeResearch.run(79, false);
 
         Spark.stop();
     }
